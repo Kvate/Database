@@ -151,7 +151,7 @@ def render_crud(cohort_filter):
 
     # 2. SORTABLE & EDITABLE TABLES
     st.markdown("---")
-    st.markdown("### 📊 Data Tables (Click headers to sort, edit cells to change)")
+    st.markdown("### Data Tables (Click headers to sort, edit cells to change)")
 
     tables = {
         "all_patients": ["patient_id", "cohort_type", "age_at_dx", "sex", "histology", "tnm_at_dx", "smoking_status", "dx_year", "last_followup", "death_date", "death_cause"],
@@ -164,7 +164,6 @@ def render_crud(cohort_filter):
     }
     
     for tbl, cols in tables.items():
-        # ИСПОЛЬЗУЕМ get_table_title для красивого отображения
         with st.expander(f"Table: {get_table_title(tbl)}"):
             where = f"WHERE patient_id IN (SELECT patient_id FROM all_patients WHERE cohort_type='{cohort_filter}')" if cohort_filter != "All" and tbl != "all_patients" else (f"WHERE cohort_type='{cohort_filter}'" if cohort_filter != "All" and tbl == "all_patients" else "")
             df = pd.read_sql(f"SELECT * FROM {tbl} {where}", get_conn())
@@ -194,7 +193,7 @@ def render_io():
         tables = ["all_patients", "alk_fusion", "ros1_fusion", "egfr_mutation", "wt", "treatments", "outcomes"]
         for i, tbl in enumerate(tables):
             with cols[i % 4]:
-                if st.button(f"Export {get_table_title(tbl)}"): # ИСПОЛЬЗУЕМ get_table_title здесь тоже
+                if st.button(f"Export {get_table_title(tbl)}"): 
                     df = pd.read_sql(f"SELECT * FROM {tbl}", get_conn())
                     csv = df.to_csv(index=False).encode('utf-8')
                     st.download_button(f"Download {tbl}", csv, f"{tbl}.csv", "text/csv")
