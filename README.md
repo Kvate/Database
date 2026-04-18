@@ -19,6 +19,7 @@
 ├── requirements.txt  Список зависимостей Python
 
 └── README.md         Настоящий файл документации
+
 ## Prerequisites
 Для корректной работы проекта требуется:
 - Python 3.12 или выше
@@ -29,7 +30,7 @@
 
 ### 1. Клонирование репозитория
 ```bash
-git clone https://github.com/Kvate/Database.git
+git clone https://github.com/Kvate/NSCLC-Multi-Cohort-Clinical-Database.git
 cd Database
 ```
 ### 2. Установка зависимостей
